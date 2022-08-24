@@ -8,7 +8,6 @@ public:
         res[1]=1;
         for(int i=2;i<res.size();i++)
         {
-            
             int a=s[i-1]-'0';
             int b=s[i-2]-'0';
             if(a==0 && b<=2 && b!=0)
