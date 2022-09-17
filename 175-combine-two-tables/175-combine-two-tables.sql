@@ -1,0 +1,2 @@
+# Write your MySQL query statement below
+select firstName,lastName,(select city from address where person.personId = address.personId)as city,(select state from address where person.personId= address.personId) as state from person;
