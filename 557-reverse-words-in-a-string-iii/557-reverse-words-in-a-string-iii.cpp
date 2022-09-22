@@ -1,15 +1,6 @@
 class Solution {
 public:
-    void rev(string &s,int i,int j)
-    {
-        while(i<j)
-        {
-            swap(s[i],s[j]);
-                i++;
-            j--;
-        }
-        
-    }
+  
     string reverseWords(string s) {
         for(int i=0;i<s.size();)
         {
@@ -18,7 +9,13 @@ public:
             {
                 j++;
             }
-            rev(s,i,j-1);
+            int a=i,b=j-1;
+            while(a<b)
+            {
+            swap(s[a],s[b]);
+                a++;
+                b--;
+            }
                 i=j+1;
             
         }
