@@ -4,17 +4,18 @@ public:
         int ans=0;
         for(int i=0;i<col.size();)
         {
-            priority_queue<int>pq;
+           
             int j=i;
             int sum=0;
+            int mi=INT_MIN;
             while(j<col.size() && col[i]==col[j])
             {
                 sum=sum+nt[j];
-                pq.push(nt[j]);
+                mi=max(mi,nt[j]);
                 j++;
             }
-            // cout<<sum<<" "<<pq.top()<<" "; 
-            ans=ans+sum-pq.top();
+            // cout<<sum<<" "<<mi<<endl; 
+            ans=ans+sum-mi;
             i=j;
         }
         return ans;
