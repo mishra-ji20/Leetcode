@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int check(vector<int>mp)
+    int check(vector<int>&mp)
     {
         int count=0;
         for(int i=0;i<mp.size();i++)
