@@ -1,0 +1,2 @@
+# Write your MySQL query statement below
+select product.product_id,product.product_name from product join (select  product_id ,max(sale_date)as 'sale',min(sale_date) as 'sale_date' from sales group by product_id)  as temp on(product.product_id=temp.product_id)  where sale_date>='2019-01-01' and sale<='2019-03-31'
