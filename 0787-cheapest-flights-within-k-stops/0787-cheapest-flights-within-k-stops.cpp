@@ -1,30 +1,49 @@
 class Solution {
 public:
-    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
-        vector<vector<pair<int, int>>> adj(n);
-        for (auto e : flights) {
-            adj[e[0]].push_back({e[1], e[2]});
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int s) {
+        vector<vector<long>>graph[n];
+        for(int i=0;i<flights.size();i++)
+        {
+            vector<long>arr {flights[i][1],flights[i][2]};
+            graph[flights[i][0]].push_back(arr);
         }
-        vector<int> stops(n, numeric_limits<int>::max());
-        priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
-        // {dist_from_src_node, node, number_of_stops_from_src_node}
-        pq.push({0, src, 0});
-
-        while (!pq.empty()) {
-            auto temp = pq.top();
-            pq.pop();
-            int dist = temp[0];
-            int node = temp[1];
-            int steps = temp[2];
-            // We have already encountered a path with a lower cost and fewer stops,
-            // or the number of stops exceeds the limit.
-            if (steps > stops[node] || steps > k + 1) continue;
-            stops[node] = steps;
-            if (node == dst) return dist;
-            for (auto& [neighbor, price] : adj[node]) {
-                pq.push({dist + price, neighbor, steps + 1});
+        vector<vector<long>>dp(n,vector<long>(s+2,INT_MAX));
+        queue<int>q;
+        q.push(src);
+        int k=0;
+        for(int i=0;i<=s;i++)
+        {
+            dp[src][i]=0;
+        }
+        int ans=INT_MAX;
+        while(!q.empty())
+        {
+            int b=q.size();
+            while(b--){
+            auto a=q.front();
+            q.pop();
+            // cout<<a<<" ";
+            for(int i=0;i<graph[a].size();i++)
+            {
+                // cout<<graph[a][i][0]<<" "<<dp[a][k]<<" "<<graph[a][i][1]<<endl;
+                if(k<=s){
+                   // cout<<dp[graph[a][i][0]][k+1]<<" "<<dp[a][k]<<" "<<graph[a][i][1]<<" "; 
+                if(dp[graph[a][i][0]][k+1]>dp[a][k]+graph[a][i][1])
+                {
+                   
+                    dp[graph[a][i][0]][k+1]=dp[a][k]+graph[a][i][1];
+                    if(graph[a][i][0]==dst)
+                        ans=ans<dp[graph[a][i][0]][k+1]?ans:dp[graph[a][i][0]][k+1];
+                        else
+                    q.push(graph[a][i][0]);
+                }
+                }
             }
+            }
+            k++;
         }
-        return -1;
+        if(ans==INT_MAX)
+            return -1;
+        return ans;
     }
 };
