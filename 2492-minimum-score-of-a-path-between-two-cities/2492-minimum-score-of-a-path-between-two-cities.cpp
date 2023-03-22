@@ -3,10 +3,9 @@ public:
     int minScore(int n, vector<vector<int>>& roads) {
         vector<bool>vis(n+1,0);
         vector<pair<int,int>>graph[n+1];
-        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
         for(int i=0;i<roads.size();i++)
         {
-            pq.push({roads[i][2],i});
+          
             graph[roads[i][0]].push_back({roads[i][1],roads[i][2]});
             graph[roads[i][1]].push_back({roads[i][0],roads[i][2]});
         }
@@ -27,8 +26,6 @@ public:
                     ans=min(ans,graph[a][i].second);
                     if(vis[graph[a][i].first]==0)
                     {
-                        
-                        
                         q.push(graph[a][i].first);
                         vis[graph[a][i].first]=1;
                     }
