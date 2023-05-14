@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    int backtrack(vector<int> &nums, vector<int> vis,vector<int> &dp,int index,int k){
+    int backtrack(vector<int> &nums, vector<int> &vis,vector<int> &dp,int index,int k){
         // for(int i=0;i<vis.size();i++)
         //     cout<<vis[i]<<" ";
         // cout<<endl;
