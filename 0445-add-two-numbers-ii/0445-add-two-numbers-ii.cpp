@@ -10,14 +10,14 @@
  */
 class Solution {
 public:
-    void sol(ListNode* h1,ListNode *h2,int &carry,int diff,ListNode* &res,int cnt)
+    void sol(ListNode* h1,ListNode *h2,int &carry,int diff,ListNode* &res)
     {
         if(h2==NULL)
             return;
         if(diff)
-        sol(h1->next,h2,carry,diff-1,res,cnt);
+        sol(h1->next,h2,carry,diff-1,res);
         else
-        sol(h1->next,h2->next,carry,diff,res,cnt);
+        sol(h1->next,h2->next,carry,diff,res);
         
         int a,b;
         if(diff==0)
@@ -29,7 +29,6 @@ public:
         ListNode* temp=new ListNode((h1->val+b+carry)%10,res->next);
         carry=(h1->val+b+carry)/10;
         res->next=temp;
-        cnt++; 
     }
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         ListNode*res=new ListNode(-1,NULL);
@@ -51,20 +50,14 @@ public:
         }
         int carry=0,cnt=0;
         if(s1>s2)
-            sol(l1,l2,carry,abs(s2-s1),res,cnt);
+            sol(l1,l2,carry,abs(s2-s1),res);
         else
-            sol(l2,l1,carry,abs(s2-s1),res,cnt);
+            sol(l2,l1,carry,abs(s2-s1),res);
         if(carry){
              ListNode* temp=new ListNode(carry,res->next);
              res->next=temp;
         }
             
-        return res->next;
-            
-        
-        
-        
-        
-        
+        return res->next;   
     }
 };
