@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool check(vector<int>nums,int k)
+    bool check(vector<int> &nums,int k)
     {
         if(nums.size()==1 || k==1)
             return 1;
