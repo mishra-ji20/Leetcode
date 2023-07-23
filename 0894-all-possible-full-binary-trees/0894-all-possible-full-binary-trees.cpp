@@ -11,38 +11,35 @@
  */
 class Solution {
 public:
-    
-    void create(vector<TreeNode*> &ans,vector<TreeNode*> &left,vector<TreeNode*> &right)
+    void create(vector<TreeNode*> &temp,vector<TreeNode*> &left,vector<TreeNode*> &right)
     {
         for(int i=0;i<left.size();i++)
         {
             for(int j=0;j<right.size();j++)
             {
-                TreeNode *head=new TreeNode(0,left[i],right[j]);
-                ans.push_back(head);
+                temp.push_back(new TreeNode(0,left[i],right[j]));
             }
         }
     }
-    map<int,vector<TreeNode*>>dp;
     vector<TreeNode*> allPossibleFBT(int n) {
-        
-        if(dp[n].size()>0)
-            return dp[n];
+        vector<vector<TreeNode*>>dp((n/2+1));
+        TreeNode* head=new TreeNode(0,NULL,NULL);
+        dp[0].push_back(head);
         if(n==1)
+            return dp[n/2];
+        for(int i=3;i<=n;i=i+2)
         {
-            TreeNode* head=new TreeNode(0,NULL,NULL);
-            dp[1].push_back(head);
-            return dp[1];
+            vector<TreeNode*>temp;
+            for(int j=1;j<=i-1;j=j+2)
+            {
+                create(temp,dp[j/2],dp[(i-1-j)/2]);
+            }
+            // cout<<temp.size();
+            dp[i/2]=temp;
+            
         }
-        vector<TreeNode*>ans;
-        for(int i=1;i<=n-1;i=i+2)
-        {
-            vector<TreeNode*>left=allPossibleFBT(n-1-i);  
-            vector<TreeNode*>right=allPossibleFBT(i);
-            create(ans,left,right);
-        }
-        dp[n]=ans;
-        return ans;
+        return dp[n/2];
+        
         
     }
 };
