@@ -10,7 +10,7 @@ public:
                 return mid;
             else if(arr[mid]>arr[mid+1] && arr[mid]<arr[mid-1])
             {
-                j=mid;
+                j=mid+1;
             }
             else
                 i=mid;
