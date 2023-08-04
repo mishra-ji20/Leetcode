@@ -1,27 +1,26 @@
 class Solution {
 public:
     bool wordBreak(string s, vector<string>& wordDict) {
-        unordered_map<string,bool>mp;
-        for(int i=0;i<wordDict.size();i++)
+        unordered_map<string,int>mp;
+        for(auto &it: wordDict)
         {
-            mp[wordDict[i]]=1;
+            mp[it]=1;
         }
-        vector<bool>dp(s.size()+1,0);
-         dp[0]=1;
-        for(int i=1;i<=s.size();i++){
-            if(dp[i-1]==0)
-                continue;
-            
-            string ans;
-            for(int j=i;j<=s.size();j++)
+        vector<int>dp(s.size()+1,0);
+        dp[0]=1;
+        for(int i=1;i<dp.size();i++)
+        {
+            for(int j=0;j<i;j++)
             {
-                ans.push_back(s[j-1]);
-                if(mp[ans]==1)
-                    dp[j]=1;
-            }   
+                if(dp[j]){
+                string a=s.substr(j,i-j);
+                if(mp[a]){
+                   dp[i]=1;
+                    break;
+                }
+                }
+            }
         }
         return dp[s.size()];
-            
-        
     }
 };
