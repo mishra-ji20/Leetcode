@@ -19,7 +19,7 @@ public:
             TreeNode* root=new TreeNode(i,NULL,NULL);
             dp[i][i].push_back(root);   
         }
-        function<vector<TreeNode*>(int,int)>memoization =[&](int l,int r)->vector<TreeNode*>{
+        function<vector<TreeNode*>(int l,int r)>memoization =[&](int l,int r)->vector<TreeNode*>{
             if(l>r)
                 return dp[0][0];
             
