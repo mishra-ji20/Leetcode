@@ -1,7 +1,7 @@
 class Solution {
 public:
     int combinationSum4(vector<int>& nums, int target) {
-        sort(nums.begin(),nums.end());
+        // sort(nums.begin(),nums.end());
         vector<vector<unsigned long long >>dp(target+1,vector<unsigned long long>(nums.size()+1,0));
         dp[0][0]=1;
         for(int i=0;i<=target;i++) {
