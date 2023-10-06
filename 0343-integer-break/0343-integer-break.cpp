@@ -1,22 +1,23 @@
 class Solution {
 public:
-    int integerBreak(int n) {
-        vector<int>dp(n+1);
-        dp[1]=1;
-        for(int i=2;i<=n;i++)
-        {
-             int ma=0;
-            for(int j=1,k=i-1;j<=k;j++,k--)
-            {
-                int a=max(dp[j],j);
-                int b=max(dp[k],k);
-              int ans=a*b;
-               ma=ans>ma?ans:ma; 
-               
-            }
-            dp[i]=ma;
+    int sol(vector<int> &dp,int n) {
+         if(n==0)
+            return 1;
+         if(dp[n]>0)
+            return dp[n];
+        for(int i=1;i<=n;i++) {
+                dp[n]=max(dp[n],i*sol(dp,n-i));
         }
         return dp[n];
         
+    }
+    int integerBreak(int n) {
+        
+       
+        if(n==2 || n==3)
+            return n-1;
+        vector<int>dp(n+1,0);
+        return sol(dp,n);
+       
     }
 };
