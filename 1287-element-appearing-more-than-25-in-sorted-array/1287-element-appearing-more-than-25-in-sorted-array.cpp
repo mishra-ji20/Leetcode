@@ -9,7 +9,7 @@ public:
                 j++;
                 cnt++;
             }
-            cout<<cnt<<" ";
+            // cout<<cnt<<" ";
             if(cnt>(arr.size()/4)){
                 sum=sum+arr[i];
                 
