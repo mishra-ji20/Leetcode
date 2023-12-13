@@ -11,13 +11,8 @@ public:
             }
             cnt++;
         }
-        if(target==1){
-            return cnt;
-        }else{
-            return cnt+target-1;
-        }
-        
-        
+
+        return cnt+target-1;
         
     }
 };
