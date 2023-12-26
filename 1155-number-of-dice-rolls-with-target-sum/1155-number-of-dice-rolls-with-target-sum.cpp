@@ -1,26 +1,27 @@
 class Solution {
 public:
-   
+    int dp[31][1001];
+    int recur(int n, int k, int target){
+        int mod=1000000007;
+        if((n==0 || target<=0)){
+            return n==target;
+        }
+        if(dp[n][target]){
+            return dp[n][target]-1;
+        }
+        int ans=0;
+        for(int i=1;i<=k;i++){
+            ans=((ans%mod)+(recur(n-1,k,target-i)))%mod;
+            
+        }
+        dp[n][target]=(ans%mod)+1;
+        return (ans%mod);
+    }
     
     int numRollsToTarget(int n, int k, int target) {
-        int mod=1000000007;
-        vector<vector<int>>dp(n+1,vector<int>(target+1,0));
+    
         dp[0][0]=1;
-        for(int i=1;i<=n;i++)
-        {
-            for(int j=1;j<=target;j++)
-            {
-                for(int l=1;l<=k;l++)
-                {
-                    if(j-l>=0)
-                    dp[i][j]=(dp[i][j]%mod+dp[i-1][j-l]%mod)%mod;
-                }
-            }
-        }
-        return dp[n][target];
-        
-       
-        
+        return recur(n,k,target);
         
     }
 };
