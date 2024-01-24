@@ -14,36 +14,26 @@
  * }
  */
 class Solution {
-    int recur(TreeNode root,int []dp){
-        int flag=0;
+    int recur(TreeNode root,int freq){
         int x=0;
-        dp[root.val]++;
-        if(root.left==null){
-            flag++;
-        }else{
-            x+=recur(root.left,dp);
-        }
-        if(root.right==null){
-            flag++;
-        }else{
-            x=x+recur(root.right,dp);
-        }
-        if(flag==2){
-            int check=0;
-            for(int i=0;i<dp.length;i++){
-                if(dp[i]%2==1){
-                    check++;
-                }
+        freq=freq^(1<<root.val);
+        if(root.left==null && root.right==null){
+            if(((freq) &(freq-1))==0){
+              return 1;  
             }
-            if(check<2)
-                x++;
         }
-        dp[root.val]--;
+        if(root.right!=null){
+            x=x+recur(root.right,freq);
+
+        }
+        if(root.left!=null){
+            x=x+recur(root.left,freq);
+        }
         return x;
+        
     }
     public int pseudoPalindromicPaths (TreeNode root) {
         
-        int []dp=new int[10];
-        return recur(root,dp);
+        return recur(root,0);
     }
 }
