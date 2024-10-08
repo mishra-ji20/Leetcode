@@ -2,19 +2,18 @@ class Solution {
     public String reverseWords(String s) {
         
         boolean flag =false;
-        StringBuilder ans = new StringBuilder();
+        String ans = "";
         for(int i=s.length()-1 ;i>=0;i--){
-            StringBuilder element = new StringBuilder();
+            String element = "";
             while(i>=0  && s.charAt(i)!=' '){
-                element.insert(0,s.charAt(i));
-                
+                element = s.charAt(i)+element;
                 i--;
             }
             if(!element.isEmpty()){
                 if(flag == true){
-                    ans.append(" ");
+                    ans = ans + " ";
                 }
-                ans.append(element);
+                ans = ans + element;
                 flag =true;
             }
         }
